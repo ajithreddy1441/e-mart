@@ -1,0 +1,15 @@
+/* global.css */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Ensuring body content starts below the fixed Navbar */
+body {
+  padding-top: 64px; /* Adjust this based on the height of your Navbar */
+}
