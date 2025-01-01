@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import ProductCard from './components/ProductCard';
 import Slideshow from './components/SlideShow';
 import Founders from './components/Founders';
+import Constact from './components/Contact';
+import Footer from './components/Footer';
 import './global.css';
 
 const products = [
@@ -84,6 +86,8 @@ export default function App() {
     <Slideshow images={images} />  
     <ProductCard products={products} addToCart={addToCart} toggleFavorite={toggleFavorite} /> 
     <Founders />
+    <Constact />
+    <Footer />
     </> 
 
     ); 

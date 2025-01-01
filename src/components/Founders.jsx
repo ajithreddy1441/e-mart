@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
-import { Mail, Phone, Linkedin } from 'lucide-react';
+import { Mail, Instagram, Linkedin } from 'lucide-react';
 import CEO from '../assets/CEO.jpg';
 import ceo2 from '../assets/ceo2.jpg';
 
 const founders = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    role: "CEO & Co-Founder",
+    name: "Ajith Reddy",
+    role: "CEO & Developer",
     image: CEO,
-    email: "sarah@example.com",
-    phone: "+1 (555) 123-4567",
+    email: "ajithreddy1441@gmail.com",
+    instagram: "",
     linkedin: "linkedin.com/sarahjohnson"
   },
   {
     id: 2,
-    name: "Michael Chen",
-    role: "CTO & Co-Founder",
+    name: "Siddhardha Reddy",
+    role: "CTO & Designer",
     image: ceo2,
     email: "michael@example.com",
-    phone: "+1 (555) 987-6543",
+    Instagram: "",
     linkedin: "linkedin.com/michaelchen"
   }
 ];
@@ -28,7 +28,7 @@ const Founders = () => {
   const [activeFounder, setActiveFounder] = useState(null);
 
   return (
-    <span className="py-16 bg-gray-50">
+    <span className=" bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-12 underline">Meet Our Founders</h2>
         
@@ -64,7 +64,7 @@ const Founders = () => {
                       <span>{founder.email}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Phone size={18} />
+                      <Instagram size={18} />
                       <span>{founder.phone}</span>
                     </div>
                     <div className="flex items-center gap-2">
