@@ -47,9 +47,9 @@ const Footer = () => {
           {/* Contact Info */}
           <div className="w-full sm:w-1/2 lg:w-1/4 mb-4">
             <h2 className="font-bold text-lg mb-2">Contact Info</h2>
-            <p className="text-gray-800">49 Smith St, Saint Cloud, MN 56301</p>
-            <a href="mailto:example@email.com" className="text-gray-800 hover:text-white">example@email.com</a>
-            <p className="text-gray-800 mt-1">+1 (555) 555-5555</p>
+            <p className="text-gray-800">New colony ,Prathipadu,Tadepalligudem,534146</p>
+            <a href="mailto:example@email.com" className="text-gray-800 hover:text-white">ajithreddy1441@gmail.com</a>
+            <p className="text-gray-800 mt-1">+91 6309357023</p>
           </div>
         </div>
 

@@ -5,6 +5,8 @@ import Slideshow from './components/SlideShow';
 import Founders from './components/Founders';
 import Constact from './components/Contact';
 import Footer from './components/Footer';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import './global.css';
 
 const products = [
@@ -88,6 +90,8 @@ export default function App() {
     <Founders />
     <Constact />
     <Footer />
+    <Login />
+    <Signup />
     </> 
 
     ); 
