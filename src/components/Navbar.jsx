@@ -2,10 +2,10 @@ import React from 'react';
 import { Search, ShoppingCart, Heart, User } from 'lucide-react';
 import logo from '../assets/com-logo-removebg.png';
 
-export default function Navbar({ cartCount, favoritesCount }) {
+export default function Navbar({ cartCount, favoritesCount, onCartClick }) {
   return (
     <>
-      <div className="bg-gray-900 fixed top-0 w-full z-10 h-18"> {/* Fixed height */}
+      <div className="bg-gray-900 fixed top-0 w-full z-10 h-18">
         {/* Left Section: Logo and Name */}
         <div className="absolute p-2 left-4 flex items-center">
           <img src={logo} className="w-16" alt="Logo" />
@@ -33,7 +33,7 @@ export default function Navbar({ cartCount, favoritesCount }) {
             )}
           </button>
           <div className="relative">
-            <button className="text-white hover:text-gray-600 relative">
+            <button className="text-white hover:text-gray-600 relative" onClick={onCartClick}>
               <ShoppingCart className="h-6 w-6" />
               {cartCount > 0 && (
                 <span className="absolute -top-2 right-0 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
