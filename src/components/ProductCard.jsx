@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Heart } from 'lucide-react';
 
-export default function ProductCard({ products, addToCart, toggleFavorite }) {
+export default function ProductCard({ products, addToCart, toggleFavorite, onBuyNow }) {
   const [favorites, setFavorites] = useState(new Set());
 
   const handleFavoriteClick = (product) => {
@@ -27,13 +27,11 @@ export default function ProductCard({ products, addToCart, toggleFavorite }) {
                 alt={product.name}
                 className="absolute h-full w-full object-cover"
               />
-              <button
-                onClick={() => handleFavoriteClick(product)}
-                className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
-              >
-                <Heart
-                  className={`h-5 w-5 ${favorites.has(product.id) ? "text-red-500 fill-current" : "text-gray-400"}`}
-                />
+              <button 
+                onClick={() => handleFavoriteClick(product)} 
+                className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100" 
+                aria-label={`Favorite ${product.name}`} > 
+                <Heart className={`h-5 w-5 ${favorites.has(product.id) ? "text-red-500 fill-current" : "text-gray-400"}`} /> 
               </button>
             </div>
             <div className="p-4">
@@ -41,7 +39,7 @@ export default function ProductCard({ products, addToCart, toggleFavorite }) {
               <p className="text-gray-600 mt-1">{product.price}</p>
               <div className="mt-4 flex space-x-2">
                 <button
-                  onClick={() => addToCart(product)}
+                  onClick={() => onBuyNow(product)}
                   className="w-1/2 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
                 >
                   Buy Now
