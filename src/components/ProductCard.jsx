@@ -1,17 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Heart } from 'lucide-react';
 
-export default function ProductCard({ products, addToCart, toggleFavorite, onBuyNow }) {
-  const [favorites, setFavorites] = useState(new Set());
-
+export default function ProductCard({ products, addToCart, toggleFavorite, favorites, onBuyNow }) {
   const handleFavoriteClick = (product) => {
-    const newFavorites = new Set(favorites);
-    if (newFavorites.has(product.id)) {
-      newFavorites.delete(product.id);
-    } else {
-      newFavorites.add(product.id);
-    }
-    setFavorites(newFavorites);
     toggleFavorite(product);
   };
 
@@ -31,7 +22,9 @@ export default function ProductCard({ products, addToCart, toggleFavorite, onBuy
                 onClick={() => handleFavoriteClick(product)} 
                 className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100" 
                 aria-label={`Favorite ${product.name}`} > 
-                <Heart className={`h-5 w-5 ${favorites.has(product.id) ? "text-red-500 fill-current" : "text-gray-400"}`} /> 
+                <Heart
+                  className={`h-5 w-5 ${favorites.has(product.id) ? "text-red-500 fill-current" : "text-gray-400"}`} 
+                /> 
               </button>
             </div>
             <div className="p-4">

@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 
 export default function Favorites({ favoriteItems, onClose, onBuyNow, onRemove }) {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed top-0 right-0 flex items-center justify-center z-20">
       <div className="bg-white p-6 rounded-lg shadow-lg relative w-96">
         <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800" aria-label="Close favorites">
           <X className="h-6 w-6" />
@@ -23,7 +23,7 @@ export default function Favorites({ favoriteItems, onClose, onBuyNow, onRemove }
                   </div>
                 </div>
                 <div className="flex space-x-2">
-                  <button onClick={() => onBuyNow(item)} className="text-blue-600 hover:text-blue-800">Buy Now</button>
+                  <button onClick={() => onBuyNow(item)} className=" bg-blue-600 text-white w-20 rounded-md hover:bg-blue-700 transition-colors">Buy Now</button>
                   <button onClick={() => onRemove(item.id)} className="text-red-600 hover:text-red-800">Remove</button>
                 </div>
               </li>

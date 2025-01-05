@@ -31,7 +31,7 @@ const images = [
 
 export default function App() {
   const [cart, setCart] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(new Set());
   const [view, setView] = useState('home'); 
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [isFavoritesVisible, setIsFavoritesVisible] = useState(false);
@@ -47,15 +47,23 @@ export default function App() {
   };
 
   const removeFromFavorites = (productId) => {
-    setFavorites(prevFavorites => prevFavorites.filter(item => item.id !== productId));
+    setFavorites(prevFavorites => {
+      const newFavorites = new Set(prevFavorites);
+      newFavorites.delete(productId);
+      return newFavorites;
+    });
   };
 
   const toggleFavorite = (product) => {
-    if (favorites.some((fav) => fav.id === product.id)) {
-      setFavorites(favorites.filter((fav) => fav.id !== product.id));
-    } else {
-      setFavorites([...favorites, product]);
-    }
+    setFavorites(prevFavorites => {
+      const newFavorites = new Set(prevFavorites);
+      if (newFavorites.has(product.id)) {
+        newFavorites.delete(product.id);
+      } else {
+        newFavorites.add(product.id);
+      }
+      return newFavorites;
+    });
   };
 
   const handleBuyNow = (product) => {
@@ -77,6 +85,7 @@ export default function App() {
               products={products} 
               addToCart={addToCart} 
               toggleFavorite={toggleFavorite}
+              favorites={favorites}  // Pass favorites set
               onBuyNow={handleBuyNow} 
             />
             <Founders />
@@ -91,13 +100,13 @@ export default function App() {
     <>
       <Navbar
         cartCount={cart.length}
-        favoritesCount={favorites.length}
+        favoritesCount={favorites.size}  // Update count to reflect Set size
         onLoginClick={() => setView('login')}
         onCartClick={() => setIsCartVisible(true)}
         onFavoritesClick={() => setIsFavoritesVisible(true)}
       />
       {isCartVisible && <Cart cartItems={cart} onClose={() => setIsCartVisible(false)} onRemove={removeFromCart} />}
-      {isFavoritesVisible && <Favorites favoriteItems={favorites} onClose={() => setIsFavoritesVisible(false)} onBuyNow={handleBuyNow} onRemove={removeFromFavorites} />}
+      {isFavoritesVisible && <Favorites favoriteItems={[...favorites].map(id => products.find(p => p.id === id))} onClose={() => setIsFavoritesVisible(false)} onBuyNow={handleBuyNow} onRemove={removeFromFavorites} />}
       {isPaymentVisible && selectedProduct && <Payment product={selectedProduct} onClose={() => setIsPaymentVisible(false)} />}
       {renderContent()}
     </>
