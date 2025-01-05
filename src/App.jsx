@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Updated import
 import Navbar from './components/Navbar';
 import ProductCard from './components/ProductCard';
 import Slideshow from './components/SlideShow';
 import Founders from './components/Founders';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Products from './components/Products'; // New component import
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Cart from './components/Cart';
@@ -32,7 +34,6 @@ const images = [
 export default function App() {
   const [cart, setCart] = useState([]);
   const [favorites, setFavorites] = useState(new Set());
-  const [view, setView] = useState('home'); 
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [isFavoritesVisible, setIsFavoritesVisible] = useState(false);
   const [isPaymentVisible, setIsPaymentVisible] = useState(false);
@@ -71,36 +72,11 @@ export default function App() {
     setIsPaymentVisible(true);
   };
 
-  const renderContent = () => {
-    switch (view) {
-      case 'login':
-        return <Login onSignUpClick={() => setView('signup')} />;
-      case 'signup':
-        return <Signup onLoginClick={() => setView('login')} />;
-      default:
-        return (
-          <>
-            <Slideshow images={images} />
-            <ProductCard 
-              products={products} 
-              addToCart={addToCart} 
-              toggleFavorite={toggleFavorite}
-              favorites={favorites}  // Pass favorites set
-              onBuyNow={handleBuyNow} 
-            />
-            <Founders />
-            <Contact />
-            <Footer />
-          </>
-        );
-    }
-  };
-
   return (
-    <>
+    <Router>
       <Navbar
         cartCount={cart.length}
-        favoritesCount={favorites.size}  // Update count to reflect Set size
+        favoritesCount={favorites.size}
         onLoginClick={() => setView('login')}
         onCartClick={() => setIsCartVisible(true)}
         onFavoritesClick={() => setIsFavoritesVisible(true)}
@@ -108,7 +84,32 @@ export default function App() {
       {isCartVisible && <Cart cartItems={cart} onClose={() => setIsCartVisible(false)} onRemove={removeFromCart} />}
       {isFavoritesVisible && <Favorites favoriteItems={[...favorites].map(id => products.find(p => p.id === id))} onClose={() => setIsFavoritesVisible(false)} onBuyNow={handleBuyNow} onRemove={removeFromFavorites} />}
       {isPaymentVisible && selectedProduct && <Payment product={selectedProduct} onClose={() => setIsPaymentVisible(false)} />}
-      {renderContent()}
-    </>
+      <Routes> {/* Updated to Routes */}
+        <Route path="/login" element={<Login onSignUpClick={() => setView('signup')} />} /> {/* Updated syntax */}
+        <Route path="/signup" element={<Signup onLoginClick={() => setView('login')} />} /> {/* Updated syntax */}
+        <Route path="/" element={
+          <>
+            <Slideshow images={images} />
+            <ProductCard
+              products={products}
+              addToCart={addToCart}
+              toggleFavorite={toggleFavorite}
+              favorites={favorites}
+              onBuyNow={handleBuyNow}
+            />
+            <Founders />
+            <Contact />
+            <Footer />
+            <Products
+              products={products}
+              addToCart={addToCart}
+              toggleFavorite={toggleFavorite}
+              favorites={favorites}
+              onBuyNow={handleBuyNow}
+            />
+          </>
+        } />
+      </Routes>
+    </Router>
   );
 }

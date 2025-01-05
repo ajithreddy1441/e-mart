@@ -42,7 +42,7 @@ const Founders = () => {
                     ? 'w-1/2 left-0'
                     : 'w-1/2 left-1/2'
                   : activeFounder === founder.id
-                  ? 'w-full left-0 z-10'
+                  ? 'w-full left-0 z-20'
                   : 'w-0 left-0 opacity-0'
               }`}
               onMouseEnter={() => setActiveFounder(founder.id)}
